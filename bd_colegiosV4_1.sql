@@ -186,7 +186,7 @@ CREATE TABLE maestro (
 -- =========================
 create table materia(
                         id_materia INT PRIMARY KEY AUTO_INCREMENT,
-                        nombre_materia VARCHAR(40) UNIQUE NOT NULL,
+                        nombre_materia VARCHAR(40) UNIQUE NOT NULL
 );
 
 
