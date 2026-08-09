@@ -339,6 +339,25 @@ CREATE TABLE inscripcion(
 );
 
 
+-- =========================
+-- NOTA
+-- =========================
+  CREATE TABLE grado_academico_materia (
+    id_grado_academico_materia INT PRIMARY KEY AUTO_INCREMENT,
+
+    fk_id_grado_academico INT NOT NULL,
+    fk_id_materia INT NOT NULL,
+
+    FOREIGN KEY (fk_id_grado_academico)
+        REFERENCES grado_academico(id_grado_academico),
+
+    FOREIGN KEY (fk_id_materia)
+        REFERENCES materia(id_materia),
+
+    UNIQUE (fk_id_grado_academico, fk_id_materia)
+);
+
+
 
 -- =========================
 -- TABLA BIMESTRE
@@ -369,4 +388,6 @@ CREATE TABLE nota(
     FOREIGN KEY (fk_id_materia) REFERENCES materia(id_materia),
     FOREIGN KEY (fk_id_alumno) REFERENCES alumno(id_alumno)
   );
+  
+
 
