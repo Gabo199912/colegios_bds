@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS bd_colegios;
 CREATE DATABASE IF NOT EXISTS bd_colegios;
 USE bd_colegios;
 
+
 -- =========================
 -- TABLA ROL
 -- =========================
@@ -283,27 +284,6 @@ insert into seccion values
                         (2, 'B'),
                         (3, 'C');
 
--- =========================
--- TABLA GRADO ACADEMICO
--- =========================
-create table grado_academico(
-                                id_grado_academico INT PRIMARY KEY AUTO_INCREMENT,
-                                fk_id_grado INT NOT NULL ,
-                                fk_id_especialidad INT NOT NULL ,
-                                fk_id_seccion INT NOT NULL ,
-                                activo boolean DEFAULT true,
-
-                                FOREIGN KEY (fk_id_grado) REFERENCES grado(id_grado) ,
-                                FOREIGN KEY (fk_id_especialidad) REFERENCES especialidad(id_especialidad),
-                                FOREIGN KEY (fk_id_seccion) REFERENCES seccion(id_seccion),
-
-                                    CONSTRAINT uk_grado_especialidad_seccion
-                                    UNIQUE(fk_id_grado, fk_id_especialidad, fk_id_seccion)
-);
-
-INSERT INTO grado_academico (fk_id_grado, fk_id_especialidad, fk_id_seccion) VALUES
-(1, 1, 1), (1, 1, 2), (1, 1, 3), (1, 2, 1), (1, 2, 2), (1, 2, 3), (2, 1, 1), (2, 1, 2), (2, 1, 3), (2, 2, 1), (2, 2, 2), (2, 2, 3);
-
 
 
 -- =========================
@@ -318,6 +298,31 @@ create table ciclo_escolar(
 insert into ciclo_escolar values (1, 2026, true), (2, 2027, true), (3,2028, true);
 
 
+
+
+-- =========================
+-- TABLA GRADO ACADEMICO
+-- =========================
+create table grado_academico(
+                                id_grado_academico INT PRIMARY KEY AUTO_INCREMENT,
+                                fk_id_grado INT NOT NULL ,
+                                fk_id_especialidad INT NOT NULL ,
+                                fk_id_seccion INT NOT NULL ,
+                                fk_id_ciclo_escolar INT NOT NULL ,
+                                activo boolean DEFAULT true,
+
+                                FOREIGN KEY (fk_id_grado) REFERENCES grado(id_grado) ,
+                                FOREIGN KEY (fk_id_especialidad) REFERENCES especialidad(id_especialidad),
+                                FOREIGN KEY (fk_id_seccion) REFERENCES seccion(id_seccion),
+                                FOREIGN KEY (fk_id_ciclo_escolar) REFERENCES ciclo_escolar(id_ciclo_escolar),
+
+                                    CONSTRAINT uk_grado_especialidad_seccion
+                                    UNIQUE(fk_id_grado, fk_id_especialidad, fk_id_seccion, fk_id_ciclo_escolar)
+);
+
+INSERT INTO grado_academico (fk_id_grado, fk_id_especialidad, fk_id_seccion, fk_id_ciclo_escolar) VALUES
+(1, 1, 1, 1), (1, 1, 2, 1), (1, 1, 3, 1), (1, 2, 1, 1), (1, 2, 2, 1), (1, 2, 3, 1), (2, 1, 1, 1), (2, 1, 2, 1), (2, 1, 3, 1), (2, 2, 1, 1), (2, 2, 2, 1), (2, 2, 3, 1);
+
 -- =========================
 -- INSCRIPCION
 -- =========================
@@ -325,9 +330,12 @@ CREATE TABLE inscripcion(
 	id_inscripcion INT PRIMARY KEY AUTO_INCREMENT,
     fk_id_grado_academico INT NOT NULL,
     fk_id_alumno INT NOT NULL, 
-    fk_id_ciclo_escolar INT NOT NULL,
     inscripcion_activa BOOLEAN DEFAULT TRUE, 
-    fecha_inscripcion DATETIME DEFAULT CURRENT_TIMESTAMP
+    fecha_inscripcion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    
+    FOREIGN KEY (fk_id_grado_academico) REFERENCES grado_academico (id_grado_academico),
+    FOREIGN KEY (fk_id_alumno) REFERENCES alumno (id_alumno)
 );
 
 
@@ -352,8 +360,13 @@ CREATE TABLE bimestre (
 CREATE TABLE nota(
 	id_nota INT PRIMARY KEY AUTO_INCREMENT,
     fk_id_bimestre INT NOT NULL,
-    fk_id_maestro INT NOT NULL,
+    fk_id_materia INT NOT NULL,
+    fk_id_alumno INT NOT NULL,
     nota DOUBLE,
-    descripcion VARCHAR(100)
-);
+    descripcion VARCHAR(100),
+    
+    FOREIGN KEY (fk_id_bimestre) REFERENCES bimestre(id_bimestre),
+    FOREIGN KEY (fk_id_materia) REFERENCES materia(id_materia),
+    FOREIGN KEY (fk_id_alumno) REFERENCES alumno(id_alumno)
+  );
 
