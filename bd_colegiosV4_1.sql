@@ -187,7 +187,7 @@ CREATE TABLE maestro (
 -- =========================
 create table materia(
                         id_materia INT PRIMARY KEY AUTO_INCREMENT,
-                        nombre_materia VARCHAR(40) UNIQUE NOT NULL
+                        nombre_materia VARCHAR(40) NOT NULL
 );
 
 
@@ -389,5 +389,54 @@ CREATE TABLE nota(
     FOREIGN KEY (fk_id_alumno) REFERENCES alumno(id_alumno)
   );
   
-
+INSERT INTO grado_academico_materia 
+    (fk_id_grado_academico, fk_id_materia)
+SELECT 
+    ga.id_grado_academico,
+    m.id_materia
+FROM grado_academico ga
+CROSS JOIN materia m
+WHERE ga.fk_id_grado = 1
+  AND ga.fk_id_especialidad = 1
+  AND ga.fk_id_ciclo_escolar = 1
+  AND m.nombre_materia IN (
+      'Lengua y Literatura',
+      'Matemáticas',
+      'Ciencias Sociales y Formación Ciudadana',
+      'Física',
+      'Educación Física',
+      'Expresión Artística',
+      'Filosofía',
+      'Comunicación y Lenguaje L3',
+      'Computación Aplicada',
+      'Laboratorio I',
+      'Sistemas e Instalación de Software',
+      'Contabilidad'
+  );
+  
+  INSERT INTO grado_academico_materia 
+    (fk_id_grado_academico, fk_id_materia)
+SELECT 
+    ga.id_grado_academico,
+    m.id_materia
+FROM grado_academico ga
+CROSS JOIN materia m
+WHERE ga.fk_id_grado = 2
+  AND ga.fk_id_especialidad = 1
+  AND ga.fk_id_ciclo_escolar = 1
+  AND m.nombre_materia IN (
+      'Lengua y Literatura',
+      'Matemáticas',
+      'Estadística Descriptiva',
+      'Ciencias Sociales y Formación Ciudadana',
+      'Química',
+      'Biología',
+      'Ética Profesional y Relaciones Humanas',
+      'Comunicación y Lenguaje L3',
+      'Producción de Contenidos Digitales',
+      'Laboratorio II',
+      'Reparación y Soporte Técnico',
+      'Seminario',
+      'Práctica Supervisada'
+  );
 
