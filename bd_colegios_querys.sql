@@ -73,5 +73,23 @@ from usuario u INNER JOIN detalle_pago de
                INNER JOIN pagos p
                           ON de.fk_id_pago = p.id_pago where u.id_usuario = 1;
 
-select * from usuario;
+select * from materia order by id_materia;
+
+select  materia.id_materia,
+		grado.grado,
+		seccion.seccion,
+        especialidad.nombre_especialidad,
+        materia.nombre_materia
+ from grado_academico_materia 
+	inner join materia 
+		on grado_academico_materia.fk_id_materia = materia.id_materia
+    inner join grado_academico 
+		on grado_academico_materia.fk_id_grado_academico = grado_academico.id_grado_academico
+	inner join grado
+		on grado_academico.fk_id_grado = grado.id_grado
+	inner join seccion 
+		on grado_academico.fk_id_seccion = seccion.id_seccion
+	inner join especialidad
+		on grado_academico.fk_id_especialidad = especialidad.id_especialidad
+        order by id_materia;
 

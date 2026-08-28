@@ -187,7 +187,7 @@ CREATE TABLE maestro (
 -- =========================
 create table materia(
                         id_materia INT PRIMARY KEY AUTO_INCREMENT,
-                        nombre_materia VARCHAR(40) NOT NULL
+                        nombre_materia VARCHAR(200) UNIQUE NOT NULL
 );
 
 
@@ -388,6 +388,35 @@ CREATE TABLE nota(
     FOREIGN KEY (fk_id_materia) REFERENCES materia(id_materia),
     FOREIGN KEY (fk_id_alumno) REFERENCES alumno(id_alumno)
   );
+
+INSERT INTO materia (nombre_materia) VALUES
+('Lengua y Literatura 4'),
+('Matemáticas 4'),
+('Ciencias Sociales y Formación Ciudadana 4'),
+('Física'),
+('Educación Física'),
+('Expresión Artística'),
+('Filosofía'),
+('Comunicación y Lenguaje L3 (Inglés Técnico) 4'),
+('Computación Aplicada'),
+('Laboratorio I'),
+('Sistemas e Instalación de Software'),
+('Contabilidad');
+
+INSERT INTO materia (nombre_materia) VALUES
+('Lengua y Literatura 5'),
+('Matemáticas 5'),
+('Estadística Descriptiva'),
+('Ciencias Sociales y Formación Ciudadana 5'),
+('Química'),
+('Biología'),
+('Ética Profesional y Relaciones Humanas'),
+('Comunicación y Lenguaje L3 (Inglés Técnico) 5'),
+('Producción de Contenidos Digitales'),
+('Laboratorio II'),
+('Reparación y Soporte Técnico'),
+('Seminario'),
+('Práctica Supervisada');
   
 INSERT INTO grado_academico_materia 
     (fk_id_grado_academico, fk_id_materia)
@@ -400,14 +429,14 @@ WHERE ga.fk_id_grado = 1
   AND ga.fk_id_especialidad = 1
   AND ga.fk_id_ciclo_escolar = 1
   AND m.nombre_materia IN (
-      'Lengua y Literatura',
-      'Matemáticas',
-      'Ciencias Sociales y Formación Ciudadana',
+      'Lengua y Literatura 4',
+      'Matemáticas 4',
+      'Ciencias Sociales y Formación Ciudadana 4',
       'Física',
       'Educación Física',
       'Expresión Artística',
       'Filosofía',
-      'Comunicación y Lenguaje L3',
+      'Comunicación y Lenguaje L3 (Inglés Técnico) 4',
       'Computación Aplicada',
       'Laboratorio I',
       'Sistemas e Instalación de Software',
@@ -425,18 +454,17 @@ WHERE ga.fk_id_grado = 2
   AND ga.fk_id_especialidad = 1
   AND ga.fk_id_ciclo_escolar = 1
   AND m.nombre_materia IN (
-      'Lengua y Literatura',
-      'Matemáticas',
+      'Lengua y Literatura 5',
+      'Matemáticas 5',
       'Estadística Descriptiva',
-      'Ciencias Sociales y Formación Ciudadana',
+      'Ciencias Sociales y Formación Ciudadana 5',
       'Química',
       'Biología',
       'Ética Profesional y Relaciones Humanas',
-      'Comunicación y Lenguaje L3',
+      'Comunicación y Lenguaje L3 (Inglés Técnico) 5',
       'Producción de Contenidos Digitales',
       'Laboratorio II',
       'Reparación y Soporte Técnico',
       'Seminario',
       'Práctica Supervisada'
   );
-
