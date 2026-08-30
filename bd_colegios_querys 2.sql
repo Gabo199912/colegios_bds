@@ -88,7 +88,7 @@ insert into ciclo_escolar values (2,2027,true), (3,2028,true);
  SELECT
 	ga.id_grado_academico,
 	g.grado,
-	e.nombre_especialidad,
+	e.nombre_especialidad AS nombreEspecialidad,
 	s.seccion as especialidad 
  from grado_academico ga 
 	INNER JOIN especialidad e
@@ -96,7 +96,7 @@ insert into ciclo_escolar values (2,2027,true), (3,2028,true);
 	INNER JOIN seccion s
 		ON ga.fk_id_seccion = s.id_seccion
 	INNER JOIN grado g
-		ON ga.fk_id_grado = g.id_grado order by id_grado_academico;
+		ON ga.fk_id_grado = g.id_grado where grado = 'CUARTO' AND nombre_especialidad = 'COMPUTACION';
         
         
 select a.id_alumno, a.codigo_alumno, u.nombre, u.apellido, u.email from usuario u 
@@ -111,6 +111,22 @@ on usuario.id_usuario = alumno.fk_id_usuario
 inner join inscripcion on alumno.id_alumno = inscripcion.fk_id_alumno
 inner join grado_academico on inscripcion.fk_id_grado_academico = grado_academico.id_grado_academico;
     
+-- v-------------------------------------PARTE DE MATERIAS--------------------------------
+-- BUSCAR LOS DATOS SOLICITADOS COMO MATEERIA Y SECCION .
+select * from grado where grado.grado like '%cuarto%';
+
+select grado_academico.id_grado_academico,
+	   grado.grado,
+	   especialidad.nombre_especialidad as nombreEspecialidad,
+       seccion.seccion
+       from grado_academico 
+	inner join grado 
+		on grado_academico.fk_id_grado = grado.id_grado
+	inner join especialidad 
+		on grado_academico.fk_id_especialidad = especialidad.id_especialidad
+	inner join seccion
+		on grado_academico.fk_id_seccion = seccion.id_seccion
+	where especialidad.nombre_especialidad = 'computacion' and grado.grado = 'cuarto';
 
 
     
