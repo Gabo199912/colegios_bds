@@ -181,7 +181,6 @@ CREATE TABLE maestro (
                          FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario)
 );
 
-
 -- =========================
 -- TABLA MATERIA
 -- =========================
@@ -407,6 +406,8 @@ INSERT INTO materia (nombre_materia) VALUES
 ('Lengua y Literatura 5'),
 ('Matemáticas 5'),
 ('Estadística Descriptiva'),
+('Ciencias Sociales y Formación Ciudadana 5'),
+('Ciencias Sociales y Formación Ciudadana 5'),
 ('Ciencias Sociales y Formación Ciudadana 5'),
 ('Química'),
 ('Biología'),
