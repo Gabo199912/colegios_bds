@@ -106,6 +106,39 @@ select a.id_alumno, a.codigo_alumno, u.nombre, u.apellido, u.email from usuario 
     INNER JOIN rol r ON ur.fk_id_rol = r.id_rol where r.tipo_usuario = 'ALUMNO' order by id_alumno;
     
     
+-- VALIDAR A QUE GRADO ESTA ASIGNADO CADA ALUMNO
+SELECT usuario.id_usuario,
+	   usuario.nombre_usuario,
+	   usuario.email,
+       alumno.codigo_alumno,
+       grado.grado,
+       especialidad.nombre_especialidad,
+       seccion.seccion
+       FROM usuario 
+	inner join alumno
+		on usuario.id_usuario = alumno.fk_id_usuario
+	inner join inscripcion
+		on alumno.id_alumno = inscripcion.fk_id_alumno
+	inner join grado_academico
+		on grado_academico.id_grado_academico = inscripcion.fk_id_grado_academico
+	inner join grado
+		on grado_academico.fk_id_grado = grado.id_grado
+	inner join especialidad
+		on grado_academico.fk_id_especialidad = especialidad.id_especialidad
+	inner join seccion
+		on grado_academico.fk_id_seccion = seccion.id_seccion order by usuario.id_usuario;
+        
+        
+select grado_academico.id_grado_academico,
+	   ciclo_escolar.anio,
+       ciclo_escolar.activo
+		from grado_academico
+	inner join ciclo_escolar
+		on grado_academico.fk_id_ciclo_escolar = ciclo_escolar.id_ciclo_escolar;
+        
+        select * from inscripcion;
+    
+    
 select * from usuario inner join alumno 
 on usuario.id_usuario = alumno.fk_id_usuario
 inner join inscripcion on alumno.id_alumno = inscripcion.fk_id_alumno

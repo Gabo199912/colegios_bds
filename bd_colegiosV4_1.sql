@@ -164,6 +164,7 @@ values
 
 create table detalle_pago_mes(
                                  id_detalle_pago_mes int auto_increment primary key,
+                                 pagado boolean default true,
                                  fk_id_mes int,
                                  fk_id_detalle_pago int,
 
@@ -407,8 +408,6 @@ INSERT INTO materia (nombre_materia) VALUES
 ('Matemáticas 5'),
 ('Estadística Descriptiva'),
 ('Ciencias Sociales y Formación Ciudadana 5'),
-('Ciencias Sociales y Formación Ciudadana 5'),
-('Ciencias Sociales y Formación Ciudadana 5'),
 ('Química'),
 ('Biología'),
 ('Ética Profesional y Relaciones Humanas'),
@@ -469,3 +468,4 @@ WHERE ga.fk_id_grado = 2
       'Seminario',
       'Práctica Supervisada'
   );
+  
