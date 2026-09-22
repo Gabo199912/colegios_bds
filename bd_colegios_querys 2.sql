@@ -57,7 +57,9 @@ from usuario u INNER JOIN detalle_pago de
                 INNER JOIN detalle_mes dm
                     ON dpm.fk_id_mes = dm.id_mes
                 INNER JOIN pagos p
-                    ON de.fk_id_pago = p.id_pago where u.id_usuario = 1;
+                    ON de.fk_id_pago = p.id_pago;
+                    
+select * from usuario where usuario.nombre = 'byron fernando';
 
 -- VALIDAR MESES PAGADOS POR USUARIO
 select u.nombre_usuario,
@@ -97,6 +99,38 @@ insert into ciclo_escolar values (2,2027,true), (3,2028,true);
 		ON ga.fk_id_seccion = s.id_seccion
 	INNER JOIN grado g
 		ON ga.fk_id_grado = g.id_grado where grado = 'CUARTO' AND nombre_especialidad = 'COMPUTACION';
+        
+        
+SELECT
+	ga.id_grado_academico,
+	g.grado,
+    s.seccion,
+	e.nombre_especialidad AS nombreEspecialidad,
+	s.seccion as especialidad 
+ from grado_academico ga 
+	INNER JOIN especialidad e
+		ON ga.fk_id_especialidad = e.id_especialidad
+	INNER JOIN seccion s
+		ON ga.fk_id_seccion = s.id_seccion
+	INNER JOIN grado g
+		ON ga.fk_id_grado = g.id_grado
+    where grado = 'CUARTO' AND nombre_especialidad = 'COMPUTACION' AND seccion = 'A';
+    
+SELECT
+	ga.id_grado_academico,
+    ga.fk_id_grado,
+    ga.fk_id_especialidad,
+    ga.fk_id_seccion,
+    ga.fk_id_ciclo_escolar,
+    ga.activo
+    from grado_academico ga 
+	INNER JOIN especialidad e
+		ON ga.fk_id_especialidad = e.id_especialidad
+	INNER JOIN seccion s
+		ON ga.fk_id_seccion = s.id_seccion
+	INNER JOIN grado g
+		ON ga.fk_id_grado = g.id_grado
+    where grado = 'CUARTO' AND nombre_especialidad = 'COMPUTACION' AND seccion = 'A';
         
         
 select a.id_alumno, a.codigo_alumno, u.nombre, u.apellido, u.email from usuario u 
